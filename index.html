@@ -1,0 +1,308 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MadMan Gamming</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #080808;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            background: #0d0d0d;
+            border-bottom: 2px solid #ff2020;
+            box-shadow: 0 0 25px rgba(255, 20, 20, .25);
+        }
+
+        header h1 {
+            font-size: clamp(40px, 7vw, 75px);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #fff;
+            text-shadow:
+                0 0 10px #ff2020,
+                0 0 25px #ff2020,
+                0 0 50px #ff0000;
+        }
+
+        header p {
+            color: #888;
+            margin-top: 8px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: #111;
+            border-bottom: 1px solid #222;
+        }
+
+        nav button {
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #1b1b1b;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: #e51d1d;
+            border-color: #ff3030;
+            box-shadow: 0 0 15px rgba(255, 30, 30, .4);
+        }
+
+        #gameContainer {
+            width: 100%;
+            height: calc(100vh - 165px);
+            min-height: 600px;
+            background: #000;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+            background: #000;
+        }
+
+        iframe.active {
+            display: block;
+        }
+
+        #welcome {
+            position: absolute;
+            inset: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            text-align: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #202020 0%,
+                    #0b0b0b 50%,
+                    #000 100%
+                );
+        }
+
+        #welcome h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px #ff2020;
+        }
+
+        #welcome p {
+            color: #888;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .launch {
+            margin-top: 25px;
+            padding: 14px 28px;
+            background: #e51d1d;
+            border: none;
+            color: white;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .launch:hover {
+            background: #ff3333;
+        }
+
+        #notice {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: min(500px, 90%);
+            padding: 30px;
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 15px;
+        }
+
+        #notice h3 {
+            margin-bottom: 10px;
+        }
+
+        #notice p {
+            color: #999;
+            line-height: 1.5;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            color: #555;
+            background: rgba(0,0,0,.8);
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            nav button {
+                padding: 9px 13px;
+                font-size: 12px;
+            }
+
+            #gameContainer {
+                height: calc(100vh - 190px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MadMan Gamming</h1>
+    <p>Your gaming hub</p>
+</header>
+
+<nav>
+    <button class="active" onclick="showGame('welcome', this)">
+        🏠 HOME
+    </button>
+
+    <button onclick="showGame('q13x', this)">
+        ⛏️ 1.12.2
+    </button>
+
+    <button onclick="showGame('conflict', this)">
+        🌎 CONFLICT OF NATIONS
+    </button>
+
+    <button onclick="showGame('solar', this)">
+        ☀️ SOLAR SMASH
+    </button>
+</nav>
+
+<div id="gameContainer">
+
+    <!-- Home -->
+    <div id="welcome">
+        <h2>🎮 MADMAN GAMMING</h2>
+
+        <p>
+            Choose a game above to launch it directly
+            inside the MadMan Gamming website.
+        </p>
+
+        <button class="launch"
+                onclick="showGame('q13x', document.querySelectorAll('nav button')[1])">
+            START GAMING
+        </button>
+    </div>
+
+
+    <!-- Q13X -->
+    <iframe
+        id="q13x"
+        src="https://reading.q13x.com/1.12.2/js/"
+        title="Q13X 1.12.2">
+    </iframe>
+
+
+    <!-- Conflict of Nations -->
+    <iframe
+        id="conflict"
+        src="https://www.conflictnations.com/"
+        title="Conflict of Nations">
+    </iframe>
+
+
+    <!-- Solar Smash -->
+    <iframe
+        id="solar"
+        src="https://solar-smash.com/"
+        title="Solar Smash">
+    </iframe>
+
+
+    <div id="notice">
+        <h3>Game could not be embedded</h3>
+        <p>
+            This game may prevent other websites from displaying
+            it inside an iframe. That's a security restriction
+            controlled by the game's website and cannot be
+            overridden by normal HTML.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    MadMan Gamming © 2026
+</footer>
+
+<script>
+    function showGame(gameId, button) {
+
+        // Hide every game
+        document.querySelectorAll("iframe").forEach(frame => {
+            frame.classList.remove("active");
+        });
+
+        // Hide welcome screen
+        document.getElementById("welcome").style.display = "none";
+
+        // Update navigation
+        document.querySelectorAll("nav button").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        if (button) {
+            button.classList.add("active");
+        }
+
+        // Show selected game
+        const game = document.getElementById(gameId);
+
+        if (game) {
+            if (game.tagName === "IFRAME") {
+                game.classList.add("active");
+            } else {
+                game.style.display = "flex";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
+```
